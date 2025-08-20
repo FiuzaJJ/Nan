@@ -1,5 +1,6 @@
 import torch
 from scipy.interpolate import interp1d
+import numpy as np 
 
 def sinusoidal_noise(length):
     """
@@ -30,6 +31,32 @@ def left_right_shift(wavelengths, intensities, maxshift):#not super fast
 
     # Convert back to torch.Tensor
     return torch.tensor(shifted, dtype=torch.float32)
+
+def reversible_scaler(array,max,reverse = False):
+    """Applys a reversible scaling to the data [0,1] based on the max concentration of that compound
+
+    Reverse = True for reverse
+    max= max of the original data
+    don't input max if reversing
+    """
+
+    if max is None and reverse==False:
+        maximum=np.max(array,axis=0)#returns 3 element array
+
+        for i in range(len(array)):
+            array[i]=array[i]/maximum
+        return array, maximum
+
+    else:
+        for i in range(len(array)):
+            array[i]=array[i]*max
+            array=np.maximum(array,0)
+    
+        return array
+
+
+
+
 
 
 # def left_right_shift(wavelengths,intensities,maxshift):

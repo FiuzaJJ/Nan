@@ -18,7 +18,7 @@ class RamanDataset(Dataset):
             spectra = np.stack(spectra)  # fix object array
         self.spectra = torch.tensor(spectra, dtype=torch.float32)
         
-
+        
         self.targets = None if targets is None else torch.tensor(targets, dtype=torch.float32)
         self.train = train
 
@@ -34,11 +34,11 @@ class RamanDataset(Dataset):
 
 
         # #data augmentation steps
-        if self.train:
-            #cosign augmentation
-            spectrum = spectrum + sinusoidal_noise(1340)
-            spectrum = left_right_shift(torch.linspace(300,1940,1340),spectrum,5)
-            print("Data Augmentation")
+        # if self.train:
+        #     #cosign augmentation
+        #     spectrum = spectrum + sinusoidal_noise(1340)
+        #     spectrum = left_right_shift(torch.linspace(300,1940,1340),spectrum,3)
+        #     print("Data Augmentation")
 
         if self.targets is not None:
             target = self.targets[idx]
