@@ -9,7 +9,9 @@ from Raman_Dataset import RamanDataset
 def run_kfold_cv(spectra, targets, k=5, batch_size=32, epochs=10,model_class = SimpleRamanCNN):
 
     kfold = KFold(n_splits=k, shuffle=True, random_state=42)
-    
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print("Using device:", device)
+
 
     train_losses=[]#arrays containing loss per epoch per model
     val_losses=[]
@@ -70,4 +72,5 @@ def run_kfold_cv(spectra, targets, k=5, batch_size=32, epochs=10,model_class = S
         torch.save(model.state_dict(), f"model{fold+1}.pth")
 
     return train_losses, val_losses, models
+
 
