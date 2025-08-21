@@ -6,8 +6,8 @@ def sinusoidal_noise(length, Amplitude_cap=0.01 , frequency_cap= 2):
     """
     Generate a 1D sinusoidal noise vector.
     - length: number of points in the spectrum
-    - amplitude: max deviation
-    - frequency: number of cycles over the spectrum
+    - Amplitude_cap: max deviation
+    - frequency_cap: number of max cycles over the spectrum
     """
     x = torch.linspace(300, 1942, length)  # evenly spaced points
 
@@ -94,5 +94,6 @@ def reversible_scaler(array,max,reverse = False):
 #         intensities
 #     )
 #     return shifted_intensities
+
 
 print("0")
