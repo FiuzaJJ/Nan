@@ -41,7 +41,7 @@ def run_kfold_cv(spectra, targets, k=5, batch_size=32, epochs=10,model_class = S
             epoch_train_loss=0.0
 
             for X, y in train_loader:
-                X_batch, y_batch = X_batch.to(device), y_batch.to(device)
+                X, y = X.to(device), y.to(device)
                 optimizer.zero_grad()
                 out = model(X)
                 loss = criterion(out, y)
@@ -60,7 +60,7 @@ def run_kfold_cv(spectra, targets, k=5, batch_size=32, epochs=10,model_class = S
             epoch_val_loss=0.0
             with torch.no_grad():
                 for X, y in val_loader: 
-                    X_batch, y_batch = X_batch.to(device), y_batch.to(device)
+                    X, y = X.to(device), y.to(device)
                     out = model(X)
                     epoch_val_loss += criterion(out, y).item()
 
@@ -72,5 +72,6 @@ def run_kfold_cv(spectra, targets, k=5, batch_size=32, epochs=10,model_class = S
         torch.save(model.state_dict(), f"model{fold+1}.pth")
 
     return train_losses, val_losses, models
+
 
 
