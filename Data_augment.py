@@ -2,7 +2,7 @@ import torch
 from scipy.interpolate import interp1d
 import numpy as np 
 
-def sinusoidal_noise(length):
+def sinusoidal_noise(length, Amplitude_cap=0.01 , frequency_cap= 2):
     """
     Generate a 1D sinusoidal noise vector.
     - length: number of points in the spectrum
@@ -11,7 +11,7 @@ def sinusoidal_noise(length):
     """
     x = torch.linspace(300, 1942, length)  # evenly spaced points
 
-    noise = torch.rand(1)/3 * torch.sin(torch.rand(1)/10 * x + torch.rand(1)*2*torch.pi)
+    noise = torch.rand(1)*Amplitude_cap * torch.sin(torch.rand(1)*frequency_cap * x + torch.rand(1)*2*torch.pi)
     return noise
 
 

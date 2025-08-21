@@ -34,9 +34,9 @@ class RamanDataset(Dataset):
 
 
         # #data augmentation steps
-        # if self.train:
+         if self.train:
         #     #cosign augmentation
-        #     spectrum = spectrum + sinusoidal_noise(1340)
+            spectrum = spectrum + sinusoidal_noise(1340)
         #     spectrum = left_right_shift(torch.linspace(300,1940,1340),spectrum,3)
         #     print("Data Augmentation")
 
