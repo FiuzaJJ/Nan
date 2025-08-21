@@ -71,7 +71,8 @@ def run_kfold_cv(spectra, targets, k=5, batch_size=32, epochs=10,model_class = S
         #store models
         torch.save(model.state_dict(), f"model{fold+1}.pth")
 
-    return train_losses, val_losses, models
+    return train_losses, val_losses
+
 
 
 
